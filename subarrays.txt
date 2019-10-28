@@ -1,0 +1,31 @@
+
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        int i=0;
+        int n=input.nextInt();
+        int[] arr=new int[n];
+        while (input.hasNext()){
+            arr[i]=input.nextInt();
+            i++;
+        }
+        
+        int counter=0;
+        for (int j=0;j<n;j++){            
+            for (int k=j;k<n;k++){
+                int sum=0;
+                for (int l=j;l<k+1;l++){
+                    sum=sum+arr[l];
+                }
+                if(sum<0){ //condition to count subarrays
+                    counter++;
+                }
+            }
+
+        }
+        System.out.println(counter);
+    }
+}
