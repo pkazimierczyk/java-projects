@@ -1,0 +1,29 @@
+/*
+Program which return max value of hourglass-shaped part of 6x6 array.
+*/
+
+import java.util.*;
+
+public class Hourglass {
+
+    private static final Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        int[][] arr = new int[6][6];
+        int max=7*(-9);
+        for (int k=0;k<6;k++){
+            for (int l=0;l<6;l++){
+                arr[k][l]=scanner.nextInt();
+                if (k>1 && l>1){
+                    int suma = arr[k-2][l-2]+arr[k-2][l-1]+arr[k-2][l]+arr[k-1][l-1]
+                    +arr[k][l-2]+arr[k][l-1]+arr[k][l];            
+                    if (suma>max){
+                        max=suma;
+                    }
+                }
+            }
+        }
+        scanner.close();
+        System.out.println(max);
+    }
+}
