@@ -1,4 +1,6 @@
-
+/*
+Program which count how many subarrays of array of integers meets some condition about sum of values(in this case - lower than zero). Input consist length of array firstly and then array
+*/
 import java.util.*;
 
 public class Solution {
