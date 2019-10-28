@@ -3,7 +3,7 @@ Program which count how many subarrays of array of integers meets some condition
 */
 import java.util.*;
 
-public class Solution {
+public class Subarrays {
 
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
