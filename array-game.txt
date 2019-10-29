@@ -1,0 +1,77 @@
+/*
+Solution to "Array game" from hackerrank.com (https://www.hackerrank.com/challenges/java-1d-array/problem). In very few words - we get array of ones and zeros and try to jump over last element starting from first, moving only by zeros and according to 3 rules: you can move one step forward, one step back or leap (defined by user) forward.
+This solution analyze game in reverse - it starts from find from which cells game can be finished ("candidates" to be a part of winning route), then from which cells those candidtes can be reached etc.
+*/
+
+import java.util.*;
+
+public class Solution {
+
+    public static boolean canWin(int leap, int[] game) {
+        int position = 0;
+        game[0] = 0;
+        int finish = game.length;
+        int[] candidates=new int[finish];
+        int new_candidates_counter = 0;
+        for (int i=0; i<finish; i++){
+            if (game[i]==0 && (i+1>=finish || i+leap>=finish)){
+                candidates[i]=1;
+                new_candidates_counter++;
+            }
+        }
+        if (new_candidates_counter==0) return false;
+        if (candidates[0]==1) return true;
+        while (new_candidates_counter>0){
+            new_candidates_counter = 0;
+            for (int j=0; j<finish; j++){                
+                if (candidates[j]==1){
+                    try {
+                        if (game[j-1]==0 && candidates[j-1]==0) {
+                            candidates[j-1]=1;
+                            new_candidates_counter++;
+                        }
+                    }   catch(ArrayIndexOutOfBoundsException a) {
+                            ;
+                    }
+                    try {
+                        if (game[j-leap]==0 && candidates[j-leap]==0) {
+                            candidates[j-leap]=1;
+                            new_candidates_counter++;
+                        }
+                    }   catch(ArrayIndexOutOfBoundsException a) {
+                            ;
+                    } 
+                    try {
+                        if (game[j+1]==0 && candidates[j+1]==0) {
+                            candidates[j+1]=1;
+                            new_candidates_counter++;
+                        }
+                    }   catch(ArrayIndexOutOfBoundsException a) {
+                            ; 
+                    }
+                }                
+                if (candidates[0]==1) return true;
+
+            }
+        }
+        return false;
+    }
+
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        int q = scan.nextInt();
+        while (q-- > 0) {
+            int n = scan.nextInt();
+            int leap = scan.nextInt();
+            
+            int[] game = new int[n];
+            for (int i = 0; i < n; i++) {
+                game[i] = scan.nextInt();
+            }
+
+            System.out.println( (canWin(leap, game)) ? "YES" : "NO" );
+        }
+        scan.close();
+    }
+}
+
